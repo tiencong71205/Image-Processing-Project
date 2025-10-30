@@ -1,0 +1,88 @@
+ĐỀ TÀI: PHỤC HỒI ẢNH BỊ MỜ VÀ THIẾU SÁNG
+
+---
+
+I. MÔ TẢ ĐỀ TÀI
+Mục tiêu: Xây dựng hệ thống phục hồi ảnh bị suy giảm chất lượng do thiếu sáng và mờ do chuyển động.
+Phạm vi: Xử lý ảnh 2D, định dạng phổ biến (.jpg, .png).
+Ngôn ngữ: Python (OpenCV, NumPy, Matplotlib, scikit-image).
+
+---
+
+II. CÁC BƯỚC THỰC HIỆN
+
+1. **Thu thập dữ liệu**
+   - Tập ảnh gốc (rõ nét).
+   - Tạo ảnh suy giảm bằng cách:
+     + Làm mờ chuyển động (motion blur kernel).
+     + Giảm độ sáng, tăng nhiễu Gaussian.
+
+2. **Tiền xử lý ảnh**
+   - Chuyển đổi ảnh sang mức xám.
+   - Chuẩn hóa giá trị pixel [0,1].
+   - Loại bỏ nhiễu bằng bộ lọc (Gaussian, Median, Bilateral).
+
+3. **Phục hồi ảnh**
+   - Phục hồi làm mờ chuyển động:
+     + Wiener Filter.
+     + Richardson-Lucy Deconvolution.
+     + Blind Deconvolution.
+   - Cải thiện độ sáng:
+     + Histogram Equalization.
+     + CLAHE (Contrast Limited Adaptive Histogram Equalization).
+     + Gamma Correction.
+
+4. **Kết hợp phương pháp**
+   - Áp dụng lần lượt: Phục hồi mờ → Cải thiện sáng.
+   - Tối ưu thứ tự xử lý bằng cách so sánh kết quả PSNR, SSIM.
+
+5. **Đánh giá kết quả**
+   - So sánh ảnh phục hồi với ảnh gốc:
+     + PSNR (Peak Signal-to-Noise Ratio)
+     + SSIM (Structural Similarity Index)
+   - Trực quan bằng biểu đồ và hiển thị ảnh.
+
+6. **Báo cáo kết quả**
+   - Viết báo cáo mô tả:
+     + Giới thiệu bài toán.
+     + Các phương pháp áp dụng.
+     + Kết quả và đánh giá.
+     + Nhận xét – hướng phát triển.
+
+---
+
+III. HƯỚNG MỞ RỘNG
+- Áp dụng học sâu (Deep Learning) như SRCNN, DeblurGAN, U-Net.
+- Tự động nhận dạng loại suy giảm (blur, noise, dark).
+- Xây dựng giao diện demo bằng Streamlit hoặc Flask.
+
+---
+
+IV. THƯ VIỆN SỬ DỤNG
+- OpenCV
+- NumPy
+- Matplotlib
+- Scikit-Image
+- PyTorch / TensorFlow (nếu mở rộng học sâu)
+
+---
+
+V.CẤU TRÚC
+project_restoration/
+│
+├── data/
+│   ├── original/
+│   ├── degraded/
+│   └── restored/
+│
+├── src/
+│   ├── preprocess.py
+│   ├── restoration.py
+│   ├── enhancement.py
+│   └── evaluate.py
+│
+├── report/
+│   └── report.tex
+│
+└── main.py
+
